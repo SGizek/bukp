@@ -1,0 +1,8 @@
+# Install Kivy via the official wheel server (required for Windows):
+# py -3.12 -m pip install kivy[base] --pre --extra-index-url https://kivy.org/downloads/simple/
+#
+# Then install the rest:
+# py -3.12 -m pip install requests plyer Pillow
+requests>=2.28.0
+plyer>=2.1.0
+Pillow>=10.0.0
