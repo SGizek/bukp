@@ -19,9 +19,12 @@ android.api = 33
 android.minapi = 21
 android.ndk = 25b
 android.ndk_api = 21
+android.sdk = 33
+android.build_tools_version = 33.0.2
 android.archs = arm64-v8a, armeabi-v7a
 android.allow_backup = True
 android.release_artifact = apk
+android.accept_sdk_license = True
 
 [buildozer]
 log_level = 2

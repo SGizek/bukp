@@ -47,6 +47,14 @@ jobs:
             pkg-config \
             cmake
 
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Accept Android SDK licenses and install build tools
+        run: |
+          yes | sdkmanager --licenses || true
+          sdkmanager "build-tools;33.0.2" "platforms;android-33" "platform-tools"
+
       - name: Install Buildozer and Cython
         run: |
           pip install --upgrade pip
