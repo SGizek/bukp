@@ -18,6 +18,12 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
       - name: Install system dependencies
         run: |
           sudo apt-get update
@@ -41,19 +47,10 @@ jobs:
             libssl-dev \
             zip \
             unzip \
-            openjdk-17-jdk \
             autoconf \
             libtool \
             pkg-config \
             cmake
-
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Accept Android SDK licenses and install build tools
-        run: |
-          yes | sdkmanager --licenses || true
-          sdkmanager "build-tools;33.0.2" "platforms;android-33" "platform-tools"
 
       - name: Install Buildozer and Cython
         run: |
