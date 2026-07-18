@@ -35,9 +35,10 @@ jobs:
             libavformat-dev \
             libavcodec-dev \
             zlib1g-dev \
-            libgstreamer1.0-dev \
-            gstreamer1.0-plugins-base \
             libgl1-mesa-dev \
+            libltdl-dev \
+            libffi-dev \
+            libssl-dev \
             zip \
             unzip \
             openjdk-17-jdk \
