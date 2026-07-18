@@ -52,6 +52,11 @@ jobs:
             pkg-config \
             cmake
 
+      - name: Accept Android SDK licenses
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "build-tools;33.0.2" "platforms;android-33"
+
       - name: Install Buildozer and Cython
         run: |
           pip install --upgrade pip
@@ -66,8 +71,21 @@ jobs:
             buildozer-${{ runner.os }}-
 
       - name: Build APK
+        env:
+          ANDROIDSDK: ${{ env.ANDROID_HOME }}
+          ANDROIDNDK: ${{ env.ANDROID_NDK_HOME }}
+          ANDROIDAPI: "33"
+          ANDROIDMINAPI: "21"
         run: |
-          buildozer -v android debug
+          buildozer -v android debug 2>&1 | tee buildozer_full.log || \
+          (grep -A 5 "ERROR\|Error\|error\|FAILED\|failed" buildozer_full.log | tail -60 && exit 1)
+
+      - name: Upload build log on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: buildozer-log
+          path: buildozer_full.log
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
