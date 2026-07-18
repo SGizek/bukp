@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+dist/
+build/
+build_log.txt
+BukpMobile.spec
+.buildozer/
+bin/
+*.apk
